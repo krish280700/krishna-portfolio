@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from 'react';
 interface Message {
   id: string;
   text: string;
-  sender: 'user' | 'system';
+  sender: 'user' | 'bot';
   timestamp: Date;
 }
 
