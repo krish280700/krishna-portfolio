@@ -2,7 +2,6 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
 
 interface Message {
   id: string;
@@ -219,7 +218,7 @@ export default function Portfolio() {
                 The next wave of technology is agentic — systems that think, decide, and act autonomously.
               </p>
               <p className="text-slate-600 mb-4 leading-relaxed">
-                I'm passionate about building AI-driven and agentic workflows that connect systems, automate complex processes, and create intelligent decision-making layers for businesses.
+                I&apos;m passionate about building AI-driven and agentic workflows that connect systems, automate complex processes, and create intelligent decision-making layers for businesses.
               </p>
               <p className="text-slate-600 mb-4 leading-relaxed">
                 With hands-on experience in web development (Next.js, Angular, Node.js) and a growing focus on AI automation tools like n8n and OpenAI, I enjoy experimenting with how AI agents can replace repetitive operations and augment human capabilities.
@@ -459,9 +458,9 @@ export default function Portfolio() {
       {/* Contact Section */}
       <section id="contact" className="py-20 px-6 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-4">Let's Connect</h2>
+          <h2 className="text-4xl font-bold mb-4">Let&apos;s Connect</h2>
           <p className="text-xl mb-12 opacity-90">
-            Let's connect if you're working in AI, agentic systems, or automation — or just exploring how intelligent workflows can reshape the future of work.
+            Let&apos;s connect if you&apos;re working in AI, agentic systems, or automation — or just exploring how intelligent workflows can reshape the future of work.
           </p>
           
           <div className="grid md:grid-cols-3 gap-6">
@@ -550,7 +549,7 @@ export default function Portfolio() {
                 KP
               </div>
               <div>
-                <h3 className="font-semibold">Krishna's AI Assistant</h3>
+                <h3 className="font-semibold">Krishna&apos;s AI Assistant</h3>
                 <p className="text-xs opacity-90">Powered by AI</p>
               </div>
             </div>
