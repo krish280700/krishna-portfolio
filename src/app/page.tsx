@@ -1,12 +1,31 @@
 // app/page.tsx
 'use client';
 
-import { useState, useEffect } from 'react';
-// import Image from 'next/image';
-// import Link from 'next/link';
+import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
+
+interface Message {
+  id: string;
+  text: string;
+  sender: 'user' | 'bot';
+  timestamp: Date;
+}
 
 export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: '1',
+      text: "Hi! I'm Krishna's AI assistant. Ask me anything about his experience, skills, or projects!",
+      sender: 'bot',
+      timestamp: new Date()
+    }
+  ]);
+  const [inputValue, setInputValue] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +34,90 @@ export default function Portfolio() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  // Function to call your Python API
+  const getBotResponseFromAPI = async (userMessage: string): Promise<string> => {
+    try {
+      const response = await fetch('YOUR_API_ENDPOINT_HERE', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // Add any additional headers like API keys if needed
+          // 'Authorization': 'Bearer YOUR_API_KEY',
+        },
+        body: JSON.stringify({
+          message: userMessage,
+          // Add any other parameters your API needs
+          // context: 'portfolio',
+          // user_id: 'visitor',
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('API request failed');
+      }
+
+      const data = await response.json();
+      
+      // Adjust this based on your API response structure
+      // Example: if your API returns { response: "text" }
+      return data.response || data.message || data.text || "Sorry, I couldn't process that.";
+      
+    } catch (error) {
+      console.error('Error calling API:', error);
+      return "I'm having trouble connecting right now. Please try again later or reach out directly at krishkrishnan2001@gmail.com";
+    }
+  };
+
+  const handleSendMessage = async () => {
+    if (!inputValue.trim()) return;
+
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      text: inputValue,
+      sender: 'user',
+      timestamp: new Date()
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+    setInputValue('');
+    setIsTyping(true);
+
+    // Call your Python API
+    const botResponseText = await getBotResponseFromAPI(inputValue);
+
+    const botMessage: Message = {
+      id: (Date.now() + 1).toString(),
+      text: botResponseText,
+      sender: 'bot',
+      timestamp: new Date()
+    };
+    
+    setMessages(prev => [...prev, botMessage]);
+    setIsTyping(false);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
+  const quickQuestions = [
+    "What are your skills?",
+    "Tell me about your experience",
+    "What AI projects have you worked on?",
+    "How can I contact you?"
+  ];
+
+  const handleQuickQuestion = (question: string) => {
+    setInputValue(question);
+  };
 
   return (
     <div className="min-h-screen">
@@ -49,7 +152,21 @@ export default function Portfolio() {
         
         <div className="text-center text-white z-10 max-w-4xl">
           {/* Profile Image */}
-          
+          <div className="mb-8 relative w-48 h-48 mx-auto">
+            <div className="w-48 h-48 rounded-full bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-sm flex items-center justify-center border-4 border-white/30 shadow-2xl">
+              {/* Replace with your actual image */}
+              {/* <Image
+                src="/profile.jpg"
+                alt="Krishna Prasanth Sridhar"
+                width={192}
+                height={192}
+                className="rounded-full object-cover"
+                priority
+              /> */}
+              {/* Fallback - shows initials */}
+              <span className="text-6xl font-bold">KP</span>
+            </div>
+          </div>
 
           <h1 className="text-5xl md:text-6xl font-bold mb-4 animate-fade-in-up">
             Krishna Prasanth Sridhar
@@ -101,7 +218,7 @@ export default function Portfolio() {
                 The next wave of technology is agentic — systems that think, decide, and act autonomously.
               </p>
               <p className="text-slate-600 mb-4 leading-relaxed">
-                I&apos;m passionate about building AI-driven and agentic workflows that connect systems, automate complex processes, and create intelligent decision-making layers for businesses.
+                I'm passionate about building AI-driven and agentic workflows that connect systems, automate complex processes, and create intelligent decision-making layers for businesses.
               </p>
               <p className="text-slate-600 mb-4 leading-relaxed">
                 With hands-on experience in web development (Next.js, Angular, Node.js) and a growing focus on AI automation tools like n8n and OpenAI, I enjoy experimenting with how AI agents can replace repetitive operations and augment human capabilities.
@@ -341,9 +458,9 @@ export default function Portfolio() {
       {/* Contact Section */}
       <section id="contact" className="py-20 px-6 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-4">Let&apos;s Connect</h2>
+          <h2 className="text-4xl font-bold mb-4">Let's Connect</h2>
           <p className="text-xl mb-12 opacity-90">
-            Let&apos;s connect if you&apos;re working in AI, agentic systems, or automation — or just exploring how intelligent workflows can reshape the future of work.
+            Let's connect if you're working in AI, agentic systems, or automation — or just exploring how intelligent workflows can reshape the future of work.
           </p>
           
           <div className="grid md:grid-cols-3 gap-6">
@@ -404,6 +521,125 @@ export default function Portfolio() {
           © 2024 Krishna Prasanth Sridhar. Built with Next.js & Tailwind CSS
         </p>
       </footer>
+
+      {/* Chatbot Button */}
+      <button
+        onClick={() => setChatOpen(!chatOpen)}
+        className="fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-br from-indigo-600 to-purple-600 text-white rounded-full shadow-2xl hover:scale-110 transition-transform z-50 flex items-center justify-center"
+        aria-label="Toggle chat"
+      >
+        {chatOpen ? (
+          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        ) : (
+          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        )}
+      </button>
+
+      {/* Chatbot Window */}
+      {chatOpen && (
+        <div className="fixed bottom-24 right-6 w-96 h-[600px] bg-white rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden">
+          {/* Chat Header */}
+          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-4 text-white">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center font-bold">
+                KP
+              </div>
+              <div>
+                <h3 className="font-semibold">Krishna's AI Assistant</h3>
+                <p className="text-xs opacity-90">Powered by AI</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Chat Messages */}
+          <div 
+            ref={chatContainerRef}
+            className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50"
+          >
+            {messages.map((message) => (
+              <div
+                key={message.id}
+                className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div
+                  className={`max-w-[80%] rounded-2xl px-4 py-3 ${
+                    message.sender === 'user'
+                      ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white'
+                      : 'bg-white text-slate-800 shadow-md'
+                  }`}
+                >
+                  <p className="text-sm leading-relaxed">{message.text}</p>
+                  <p className={`text-xs mt-1 ${
+                    message.sender === 'user' ? 'text-white/70' : 'text-slate-400'
+                  }`}>
+                    {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </p>
+                </div>
+              </div>
+            ))}
+            
+            {isTyping && (
+              <div className="flex justify-start">
+                <div className="bg-white text-slate-800 shadow-md rounded-2xl px-4 py-3">
+                  <div className="flex gap-1">
+                    <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                    <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                    <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Quick Questions */}
+          {messages.length === 1 && (
+            <div className="px-4 py-3 bg-white border-t border-slate-200">
+              <p className="text-xs text-slate-500 mb-2">Quick questions:</p>
+              <div className="flex flex-wrap gap-2">
+                {quickQuestions.map((question, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleQuickQuestion(question)}
+                    className="text-xs px-3 py-1.5 bg-slate-100 hover:bg-indigo-100 hover:text-indigo-600 rounded-full transition-colors"
+                  >
+                    {question}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Chat Input */}
+          <div className="p-4 bg-white border-t border-slate-200">
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Ask me anything..."
+                className="flex-1 px-4 py-2 border border-slate-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                disabled={isTyping}
+              />
+              <button
+                onClick={handleSendMessage}
+                disabled={!inputValue.trim() || isTyping}
+                className="w-10 h-10 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              >
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <style jsx>{`
         @keyframes float {
