@@ -7,7 +7,7 @@ import Image from 'next/image';
 interface Message {
   id: string;
   text: string;
-  sender: 'user' | 'bot';
+  sender: 'user' | 'system';
   timestamp: Date;
 }
 
@@ -42,7 +42,7 @@ export default function Portfolio() {
   // Function to call your Python API
   const getBotResponseFromAPI = async (userMessage: string): Promise<string> => {
     try {
-      const response = await fetch('YOUR_API_ENDPOINT_HERE', {
+      const response = await fetch('https://agentic-ai-ov9y.onrender.com/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,6 +51,7 @@ export default function Portfolio() {
         },
         body: JSON.stringify({
           message: userMessage,
+          history: messages.map(msg => ({ role: msg.sender, content: msg.text })),
           // Add any other parameters your API needs
           // context: 'portfolio',
           // user_id: 'visitor',
@@ -62,7 +63,7 @@ export default function Portfolio() {
       }
 
       const data = await response.json();
-      
+        console.log('API response data:', data);
       // Adjust this based on your API response structure
       // Example: if your API returns { response: "text" }
       return data.response || data.message || data.text || "Sorry, I couldn't process that.";
@@ -93,7 +94,7 @@ export default function Portfolio() {
     const botMessage: Message = {
       id: (Date.now() + 1).toString(),
       text: botResponseText,
-      sender: 'bot',
+      sender: 'system',
       timestamp: new Date()
     };
     
