@@ -93,7 +93,7 @@ export default function Portfolio() {
     const botMessage: Message = {
       id: (Date.now() + 1).toString(),
       text: botResponseText,
-      sender: 'system',
+      sender: 'bot',
       timestamp: new Date()
     };
     
