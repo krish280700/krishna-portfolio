@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from 'react';
 interface Message {
   id: string;
   text: string;
-  sender: 'user' | 'bot';
+  sender: 'user' | 'system';
   timestamp: Date;
 }
 
@@ -17,7 +17,7 @@ export default function Portfolio() {
     {
       id: '1',
       text: "Hi! I'm Krishna's AI assistant. Ask me anything about his experience, skills, or projects!",
-      sender: 'bot',
+      sender: 'system',
       timestamp: new Date()
     }
   ]);
@@ -93,7 +93,7 @@ export default function Portfolio() {
     const botMessage: Message = {
       id: (Date.now() + 1).toString(),
       text: botResponseText,
-      sender: 'bot',
+      sender: 'system',
       timestamp: new Date()
     };
     
