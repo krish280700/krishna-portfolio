@@ -606,7 +606,7 @@ export default function Portfolio() {
                   <button
                     key={idx}
                     onClick={() => handleQuickQuestion(question)}
-                    className="text-xs px-3 py-1.5 bg-slate-100 hover:bg-indigo-100 hover:text-indigo-600 rounded-full transition-colors"
+                    className="text-xs px-3 py-1.5 text-black bg-slate-100 hover:bg-indigo-100 hover:text-indigo-600 rounded-full transition-colors"
                   >
                     {question}
                   </button>
@@ -624,7 +624,7 @@ export default function Portfolio() {
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Ask me anything..."
-                className="flex-1 px-4 py-2 border border-slate-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                className="flex-1 px-4 py-2 border text-black border-slate-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
                 disabled={isTyping}
               />
               <button
