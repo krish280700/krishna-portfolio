@@ -65,7 +65,7 @@ export default function Portfolio() {
         console.log('API response data:', data);
       // Adjust this based on your API response structure
       // Example: if your API returns { response: "text" }
-      return data.response || data.message || data.text || "Sorry, I couldn't process that.";
+      return data.response || data.reply || data.text || "Sorry, I couldn't process that.";
       
     } catch (error) {
       console.error('Error calling API:', error);
