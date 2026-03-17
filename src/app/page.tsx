@@ -62,11 +62,11 @@ export default function Portfolio() {
       }
 
       const data = await response.json();
-        console.log('API response data:', data);
+      console.log('API response data:', data);
       // Adjust this based on your API response structure
       // Example: if your API returns { response: "text" }
       return data.response || data.reply || data.text || "Sorry, I couldn't process that.";
-      
+
     } catch (error) {
       console.error('Error calling API:', error);
       return "I'm having trouble connecting right now. Please try again later or reach out directly at krishkrishnan2001@gmail.com";
@@ -96,7 +96,7 @@ export default function Portfolio() {
       sender: 'system',
       timestamp: new Date()
     };
-    
+
     setMessages(prev => [...prev, botMessage]);
     setIsTyping(false);
   };
@@ -122,9 +122,8 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 backdrop-blur-lg shadow-lg py-3' : 'bg-white/95 backdrop-blur-lg py-4'
-      }`}>
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-lg shadow-lg py-3' : 'bg-white/95 backdrop-blur-lg py-4'
+        }`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <div className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
             KP
@@ -132,7 +131,7 @@ export default function Portfolio() {
           <ul className="hidden md:flex gap-8 text-slate-800 font-medium">
             {['Home', 'About', 'Skills', 'Experience', 'Education', 'Contact'].map((item) => (
               <li key={item}>
-                <a 
+                <a
                   href={`#${item.toLowerCase()}`}
                   className="relative hover:text-indigo-600 transition-colors after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-indigo-600 after:to-purple-600 hover:after:w-full after:transition-all"
                 >
@@ -149,7 +148,7 @@ export default function Portfolio() {
         {/* Animated Background Elements */}
         <div className="absolute w-[500px] h-[500px] bg-white/10 rounded-full top-[-250px] right-[-250px] animate-float" />
         <div className="absolute w-[400px] h-[400px] bg-white/10 rounded-full bottom-[-200px] left-[-200px] animate-float-delayed" />
-        
+
         <div className="text-center text-white z-10 max-w-4xl">
           {/* Profile Image */}
           <div className="mb-8 relative w-48 h-48 mx-auto">
@@ -178,13 +177,13 @@ export default function Portfolio() {
             Exploring Agentic Systems and Workflow Orchestration | Bridging Code and Intelligence
           </p>
           <div className="flex gap-4 justify-center flex-wrap animate-fade-in-up animation-delay-600">
-            <a 
+            <a
               href="#contact"
               className="px-8 py-3 bg-white text-indigo-600 rounded-full font-semibold hover:shadow-2xl hover:-translate-y-1 transition-all"
             >
               Get In Touch
             </a>
-            <a 
+            <a
               href="#experience"
               className="px-8 py-3 bg-transparent border-2 border-white text-white rounded-full font-semibold hover:bg-white hover:text-indigo-600 hover:-translate-y-1 transition-all"
             >
@@ -196,7 +195,7 @@ export default function Portfolio() {
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
           <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-            <path d="M12 5v14M19 12l-7 7-7-7"/>
+            <path d="M12 5v14M19 12l-7 7-7-7" />
           </svg>
         </div>
       </section>
@@ -208,7 +207,7 @@ export default function Portfolio() {
             About Me
             <span className="absolute bottom-[-10px] left-1/2 -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full" />
           </h2>
-          
+
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div>
               <h3 className="text-2xl font-semibold text-indigo-600 mb-4">
@@ -223,7 +222,7 @@ export default function Portfolio() {
               <p className="text-slate-600 mb-4 leading-relaxed">
                 With hands-on experience in web development (Next.js, Angular, Node.js) and a growing focus on AI automation tools like n8n and OpenAI, I enjoy experimenting with how AI agents can replace repetitive operations and augment human capabilities.
               </p>
-              
+
               <div className="mt-6">
                 <h4 className="font-semibold text-lg mb-3 text-slate-800">Core Interests:</h4>
                 <ul className="space-y-2 text-slate-600">
@@ -264,34 +263,34 @@ export default function Portfolio() {
             <div className="bg-white p-8 rounded-2xl shadow-lg">
               <h4 className="font-semibold text-lg mb-4 text-slate-800">Contact Information</h4>
               {[
-                { 
+                {
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                      <circle cx="12" cy="10" r="3"/>
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
                     </svg>
                   ),
                   text: 'Chicago, Illinois, US'
                 },
-                { 
+                {
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6">
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                     </svg>
                   ),
                   text: '+1 312-843-2216'
                 },
-                { 
+                {
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6">
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                      <polyline points="22,6 12,13 2,6"/>
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                      <polyline points="22,6 12,13 2,6" />
                     </svg>
                   ),
                   text: 'krishkrishnan2001@gmail.com'
                 }
               ].map((item, idx) => (
-                <div 
+                <div
                   key={idx}
                   className="flex items-center gap-4 p-4 mb-3 bg-slate-50 rounded-xl hover:bg-gradient-to-r hover:from-indigo-600 hover:to-purple-600 hover:text-white hover:translate-x-2 transition-all group"
                 >
@@ -311,24 +310,24 @@ export default function Portfolio() {
             Technical Skills
             <span className="absolute bottom-[-10px] left-1/2 -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full" />
           </h2>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { title: 'Languages', skills: ['HTML 5', 'CSS 3', 'JavaScript', 'TypeScript', 'Python', '.NET'] },
-              { title: 'Frameworks & Libraries', skills: ['React JS', 'Angular', 'Vue JS', 'Next JS', 'Astro', 'Blazor', 'jQuery'] },
-              { title: 'AI & Automation', skills: ['OpenAI', 'n8n', 'Agentic Systems', 'Workflow Orchestration', 'AI Integration'] },
+              { title: 'Frameworks & Libraries', skills: ['React JS', 'Angular', 'Vue JS', 'Next JS', 'Astro', 'Blazor', 'jQuery', 'Playwright', 'Pytest'] },
+              { title: 'AI & Automation', skills: ['OpenAI', 'Anthropic', 'Langchain', 'RAG', 'n8n', 'Agentic Systems', 'Workflow Orchestration', 'AI Integration'] },
               { title: 'State Management', skills: ['Redux', 'Vuex', 'RxJS', 'Context API'] },
               { title: 'Back-End & Databases', skills: ['Node.js', 'GraphQL', 'MongoDB', 'MySQL'] },
               { title: 'Tools & Deployment', skills: ['Git', 'GitHub', 'Azure', 'Vercel', 'Postman'] }
             ].map((category, idx) => (
-              <div 
+              <div
                 key={idx}
                 className="bg-white p-6 rounded-2xl shadow-lg hover:-translate-y-3 hover:shadow-2xl transition-all"
               >
                 <h3 className="text-xl font-semibold text-indigo-600 mb-4">{category.title}</h3>
                 <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill, sidx) => (
-                    <span 
+                    <span
                       key={sidx}
                       className="px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full text-sm hover:scale-110 transition-transform cursor-default"
                     >
@@ -349,34 +348,34 @@ export default function Portfolio() {
             Work Experience
             <span className="absolute bottom-[-10px] left-1/2 -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full" />
           </h2>
-          
+
           <div className="relative">
             {/* Timeline Line */}
             <div className="hidden md:block absolute left-1/2 -translate-x-1/2 w-1 h-full bg-gradient-to-b from-indigo-600 to-purple-600" />
-            
+
             {[
               {
-                title: 'Front-End Web Developer Intern',
+                title: 'Automation Engineer Intern',
                 company: 'AIFS',
                 location: 'Naperville, Illinois',
                 date: 'June 2025 - August 2025',
                 points: [
-                  'Built SEO-friendly websites using Astro with best practices for performance and discoverability',
-                  'Developed web applications using Blazor, creating responsive and scalable UIs',
-                  'Set up CI/CD pipelines on Azure App Service to automate deployment and streamline development',
+                  'Developed scalable automation solutions using Python and TypeScript, designing maintainable test architectures that integrate seamlessly into CI/CD workflows',
+                  'Built robust test suites leveraging Playwright, Pytest, and API testing best practices to validate backend services and AI-driven application logic',
+                  'Applied AI-assisted development tools to accelerate code generation, improve test coverage, and enhance debugging efficiency across complex systems.',
                   'Collaborated with teams to deliver optimized and production-ready web solutions'
                 ]
               },
               {
-                title: 'Frontend Developer',
+                title: 'Software Engineer',
                 company: 'GoWebEz',
                 location: 'Chennai, India',
                 date: 'March 2021 - December 2023',
                 subtitle: 'Inflowcare & Language Dynamic Groups - SaaS Platforms',
                 points: [
-                  'Modernized a legacy jQuery app to a scalable React.js architecture with Redux and Tailwind CSS',
-                  'Built interactive Vue.js components and managed state using Vuex for an education platform',
-                  'Integrated RESTful APIs with MongoDB and MySQL for real-time data handling',
+                  'Designed and implemented AI-powered agents using Python to automate firmware build validation, log analysis, and regression triaging, reducing manual debugging effort and improving CI feedback cycles',
+                  'Developed and maintained end-to-end CI/CD automation pipelines, enhancing build orchestration, test execution reliability, and integration workflows for firmware software releases',
+                  'Applied machine learning techniques to analyze pipeline metrics and failure patterns, enabling predictive insights and proactiveworkflow optimization',
                   'Enabled features for healthcare staff scheduling, academic assessments, and progress tracking',
                   'Collaborated with U.S.-based cross-functional teams in agile sprints, focusing on performance, security, and accessibility'
                 ]
@@ -385,7 +384,7 @@ export default function Portfolio() {
               <div key={idx} className="mb-12 relative">
                 {/* Timeline Dot */}
                 <div className="hidden md:block absolute left-1/2 -translate-x-1/2 w-5 h-5 bg-white border-4 border-indigo-600 rounded-full z-10" />
-                
+
                 <div className={`md:w-[calc(50%-40px)] ${idx % 2 === 0 ? 'md:ml-auto md:pl-12' : 'md:pr-12'}`}>
                   <div className="bg-white p-6 rounded-2xl shadow-lg hover:scale-105 hover:shadow-2xl transition-all">
                     <h3 className="text-2xl font-semibold text-indigo-600 mb-2">{job.title}</h3>
@@ -417,7 +416,7 @@ export default function Portfolio() {
             Education
             <span className="absolute bottom-[-10px] left-1/2 -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full" />
           </h2>
-          
+
           <div className="space-y-6">
             {[
               {
@@ -436,7 +435,7 @@ export default function Portfolio() {
                 location: 'India'
               }
             ].map((edu, idx) => (
-              <div 
+              <div
                 key={idx}
                 className="bg-white p-8 rounded-2xl shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all text-center max-w-3xl mx-auto"
               >
@@ -462,14 +461,14 @@ export default function Portfolio() {
           <p className="text-xl mb-12 opacity-90">
             Let&apos;s connect if you&apos;re working in AI, agentic systems, or automation — or just exploring how intelligent workflows can reshape the future of work.
           </p>
-          
+
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
                 icon: (
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-12 h-12 mx-auto mb-4">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                    <polyline points="22,6 12,13 2,6"/>
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
                   </svg>
                 ),
                 title: 'Email',
@@ -479,9 +478,9 @@ export default function Portfolio() {
               {
                 icon: (
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-12 h-12 mx-auto mb-4">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                    <rect x="2" y="9" width="4" height="12"/>
-                    <circle cx="4" cy="4" r="2"/>
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                    <rect x="2" y="9" width="4" height="12" />
+                    <circle cx="4" cy="4" r="2" />
                   </svg>
                 ),
                 title: 'LinkedIn',
@@ -491,7 +490,7 @@ export default function Portfolio() {
               {
                 icon: (
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-12 h-12 mx-auto mb-4">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
                   </svg>
                 ),
                 title: 'GitHub',
@@ -530,11 +529,11 @@ export default function Portfolio() {
       >
         {chatOpen ? (
           <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M18 6L6 18M6 6l12 12"/>
+            <path d="M18 6L6 18M6 6l12 12" />
           </svg>
         ) : (
           <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
           </svg>
         )}
       </button>
@@ -556,7 +555,7 @@ export default function Portfolio() {
           </div>
 
           {/* Chat Messages */}
-          <div 
+          <div
             ref={chatContainerRef}
             className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50"
           >
@@ -566,22 +565,20 @@ export default function Portfolio() {
                 className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[80%] rounded-2xl px-4 py-3 ${
-                    message.sender === 'user'
-                      ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white'
-                      : 'bg-white text-slate-800 shadow-md'
-                  }`}
+                  className={`max-w-[80%] rounded-2xl px-4 py-3 ${message.sender === 'user'
+                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white'
+                    : 'bg-white text-slate-800 shadow-md'
+                    }`}
                 >
                   <p className="text-sm leading-relaxed">{message.text}</p>
-                  <p className={`text-xs mt-1 ${
-                    message.sender === 'user' ? 'text-white/70' : 'text-slate-400'
-                  }`}>
+                  <p className={`text-xs mt-1 ${message.sender === 'user' ? 'text-white/70' : 'text-slate-400'
+                    }`}>
                     {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </p>
                 </div>
               </div>
             ))}
-            
+
             {isTyping && (
               <div className="flex justify-start">
                 <div className="bg-white text-slate-800 shadow-md rounded-2xl px-4 py-3">
@@ -593,7 +590,7 @@ export default function Portfolio() {
                 </div>
               </div>
             )}
-            
+
             <div ref={messagesEndRef} />
           </div>
 
@@ -633,7 +630,7 @@ export default function Portfolio() {
                 className="w-10 h-10 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                  <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
                 </svg>
               </button>
             </div>
