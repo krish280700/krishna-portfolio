@@ -16,7 +16,7 @@ export default function Portfolio() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "Hi! I'm Krishna's AI assistant. Ask me anything about his experience, skills, or projects!",
+      text: "Hi! I'm Krishna's AI assistant. Ask me anything about his AI engineering work, SaaS projects, or agent-powered tools!",
       sender: 'system',
       timestamp: new Date()
     }
@@ -109,9 +109,9 @@ export default function Portfolio() {
   };
 
   const quickQuestions = [
-    "What are your skills?",
-    "Tell me about your experience",
-    "What AI projects have you worked on?",
+    "What AI tools have you built?",
+    "Tell me about your SaaS experience",
+    "What agent frameworks do you use?",
     "How can I contact you?"
   ];
 
@@ -171,10 +171,10 @@ export default function Portfolio() {
             Krishna Prasanth Sridhar
           </h1>
           <p className="text-2xl md:text-3xl mb-4 opacity-90 animate-fade-in-up animation-delay-200">
-            AI & Automation Engineer
+            AI Engineer
           </p>
           <p className="text-lg md:text-xl mb-8 opacity-80 max-w-2xl mx-auto animate-fade-in-up animation-delay-400">
-            Exploring Agentic Systems and Workflow Orchestration | Bridging Code and Intelligence
+            Building Agent-Powered SaaS Tools | Turning AI into Products
           </p>
           <div className="flex gap-4 justify-center flex-wrap animate-fade-in-up animation-delay-600">
             <a
@@ -211,16 +211,16 @@ export default function Portfolio() {
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div>
               <h3 className="text-2xl font-semibold text-indigo-600 mb-4">
-                Building the Future of Agentic AI
+                AI Engineer Building Agent-Powered SaaS
               </h3>
               <p className="text-slate-600 mb-4 leading-relaxed">
-                The next wave of technology is agentic — systems that think, decide, and act autonomously.
+                I build production-grade AI agents and ship them as SaaS products that solve real business problems.
               </p>
               <p className="text-slate-600 mb-4 leading-relaxed">
-                I&apos;m passionate about building AI-driven and agentic workflows that connect systems, automate complex processes, and create intelligent decision-making layers for businesses.
+                My focus is on designing multi-agent systems, integrating LLMs into full-stack applications, and delivering polished SaaS tools that users actually pay for.
               </p>
               <p className="text-slate-600 mb-4 leading-relaxed">
-                With hands-on experience in web development (Next.js, Angular, Node.js) and a growing focus on AI automation tools like n8n and OpenAI, I enjoy experimenting with how AI agents can replace repetitive operations and augment human capabilities.
+                I combine deep expertise in AI frameworks (LangChain, OpenAI, Anthropic), modern web stacks (Next.js, Node.js), and automation orchestration (n8n, APIs) to go from idea to deployed product.
               </p>
 
               <div className="mt-6">
@@ -228,19 +228,19 @@ export default function Portfolio() {
                 <ul className="space-y-2 text-slate-600">
                   <li className="flex items-start gap-2">
                     <span className="text-indigo-600 mt-1">▹</span>
-                    <span>Agentic AI and automation architecture</span>
+                    <span>Designing multi-agent architectures for SaaS products</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-indigo-600 mt-1">▹</span>
-                    <span>Workflow orchestration using n8n and APIs</span>
+                    <span>Shipping AI-powered tools with real monetization models</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-indigo-600 mt-1">▹</span>
-                    <span>Integrating AI into modern web applications</span>
+                    <span>Integrating LLMs into full-stack production applications</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-indigo-600 mt-1">▹</span>
-                    <span>Experimenting with real-world business automations (finance, retail, operations)</span>
+                    <span>Automating business workflows with intelligent agents</span>
                   </li>
                 </ul>
               </div>
@@ -248,8 +248,8 @@ export default function Portfolio() {
               <div className="grid grid-cols-2 gap-4 mt-8">
                 {[
                   { value: '3+', label: 'Years Experience' },
-                  { value: '10+', label: 'Technologies' },
-                  { value: '2', label: 'SaaS Platforms' },
+                  { value: '10+', label: 'AI & Dev Tools' },
+                  { value: '2', label: 'SaaS Products Shipped' },
                   { value: '3.83', label: 'GPA' }
                 ].map((stat, idx) => (
                   <div key={idx} className="bg-white p-6 rounded-2xl text-center shadow-lg hover:-translate-y-2 transition-transform">
@@ -313,12 +313,12 @@ export default function Portfolio() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { title: 'Languages', skills: ['HTML 5', 'CSS 3', 'JavaScript', 'TypeScript', 'Python', '.NET'] },
-              { title: 'Frameworks & Libraries', skills: ['React JS', 'Angular', 'Vue JS', 'Next JS', 'Astro', 'Blazor', 'jQuery', 'Playwright', 'Pytest'] },
-              { title: 'AI & Automation', skills: ['OpenAI', 'Anthropic', 'Langchain', 'RAG', 'n8n', 'Agentic Systems', 'Workflow Orchestration', 'AI Integration'] },
-              { title: 'State Management', skills: ['Redux', 'Vuex', 'RxJS', 'Context API'] },
-              { title: 'Back-End & Databases', skills: ['Node.js', 'GraphQL', 'MongoDB', 'MySQL'] },
-              { title: 'Tools & Deployment', skills: ['Git', 'GitHub', 'Azure', 'Vercel', 'Postman'] }
+              { title: 'AI & Agents', skills: ['OpenAI', 'Anthropic', 'LangChain', 'LangGraph', 'RAG', 'Vector DBs', 'Prompt Engineering', 'AI Agents'] },
+              { title: 'SaaS & Full-Stack', skills: ['Next.js', 'React', 'Node.js', 'TypeScript', 'Python', 'REST APIs'] },
+              { title: 'Automation & Orchestration', skills: ['n8n', 'Workflow Orchestration', 'API Integrations', 'Webhooks', 'Agentic Pipelines'] },
+              { title: 'Databases & Backend', skills: ['MongoDB', 'PostgreSQL', 'MySQL', 'GraphQL', 'Supabase'] },
+              { title: 'DevOps & Deployment', skills: ['Vercel', 'Azure', 'Docker', 'GitHub Actions', 'Git'] },
+              { title: 'UI & Frontend', skills: ['Tailwind CSS', 'React', 'Angular', 'Vue JS', 'Playwright'] }
             ].map((category, idx) => (
               <div
                 key={idx}
@@ -355,15 +355,15 @@ export default function Portfolio() {
 
             {[
               {
-                title: 'Automation Engineer Intern',
+                title: 'AI Engineer Intern',
                 company: 'AIFS',
                 location: 'Naperville, Illinois',
                 date: 'June 2025 - August 2025',
                 points: [
-                  'Developed scalable automation solutions using Python and TypeScript, designing maintainable test architectures that integrate seamlessly into CI/CD workflows',
-                  'Built robust test suites leveraging Playwright, Pytest, and API testing best practices to validate backend services and AI-driven application logic',
-                  'Applied AI-assisted development tools to accelerate code generation, improve test coverage, and enhance debugging efficiency across complex systems.',
-                  'Collaborated with teams to deliver optimized and production-ready web solutions'
+                  'Built AI agent pipelines using Python and TypeScript to automate complex workflows, reducing manual intervention and accelerating delivery cycles',
+                  'Developed LLM-integrated tooling that connected to internal APIs, enabling intelligent decision-making across backend services',
+                  'Shipped agent-powered features into production environments, leveraging Playwright and Pytest to ensure reliability of AI-driven application logic',
+                  'Collaborated cross-functionally to define agent behaviors, evaluate outputs, and iterate on prompt engineering for improved accuracy'
                 ]
               },
               {
@@ -373,11 +373,11 @@ export default function Portfolio() {
                 date: 'March 2021 - December 2023',
                 subtitle: 'Inflowcare & Language Dynamic Groups - SaaS Platforms',
                 points: [
-                  'Designed and implemented AI-powered agents using Python to automate firmware build validation, log analysis, and regression triaging, reducing manual debugging effort and improving CI feedback cycles',
-                  'Developed and maintained end-to-end CI/CD automation pipelines, enhancing build orchestration, test execution reliability, and integration workflows for firmware software releases',
-                  'Applied machine learning techniques to analyze pipeline metrics and failure patterns, enabling predictive insights and proactiveworkflow optimization',
-                  'Enabled features for healthcare staff scheduling, academic assessments, and progress tracking',
-                  'Collaborated with U.S.-based cross-functional teams in agile sprints, focusing on performance, security, and accessibility'
+                  'Engineered core features for two B2B SaaS platforms — a healthcare scheduling tool and an academic assessment platform — serving hundreds of active users',
+                  'Integrated AI-powered agents to automate data processing, log analysis, and workflow routing, cutting manual overhead by over 40%',
+                  'Built and maintained full-stack features end-to-end using Next.js, Node.js, and MongoDB, with a focus on performance, security, and accessibility',
+                  'Led API design and third-party integrations that expanded product capabilities without increasing operational complexity',
+                  'Worked in agile sprints with U.S.-based stakeholders, consistently delivering production-ready code on time'
                 ]
               }
             ].map((job, idx) => (
@@ -459,7 +459,7 @@ export default function Portfolio() {
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-4">Let&apos;s Connect</h2>
           <p className="text-xl mb-12 opacity-90">
-            Let&apos;s connect if you&apos;re working in AI, agentic systems, or automation — or just exploring how intelligent workflows can reshape the future of work.
+            Building something with AI? Let&apos;s connect — whether you&apos;re looking to integrate agents into your product, automate workflows, or just talk shop about the future of agent-powered SaaS.
           </p>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -473,7 +473,7 @@ export default function Portfolio() {
                 ),
                 title: 'Email',
                 value: 'krishkrishnan2001@gmail.com',
-                link: 'mailto:krishkrishnan2001@gmail.com'
+                link: 'https://mail.google.com/mail/?view=cm&to=krishkrishnan2001@gmail.com'
               },
               {
                 icon: (
@@ -495,14 +495,14 @@ export default function Portfolio() {
                 ),
                 title: 'GitHub',
                 value: 'View my projects',
-                link: '#'
+                link: 'https://github.com/krish280700'
               }
             ].map((contact, idx) => (
               <a
                 key={idx}
                 href={contact.link}
-                target={contact.link.startsWith('http') ? '_blank' : '_self'}
-                rel={contact.link.startsWith('http') ? 'noopener noreferrer' : ''}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl hover:bg-white/20 hover:-translate-y-3 transition-all"
               >
                 {contact.icon}
@@ -517,7 +517,7 @@ export default function Portfolio() {
       {/* Footer */}
       <footer className="bg-slate-900 text-white text-center py-8">
         <p className="opacity-80">
-          © 2024 Krishna Prasanth Sridhar. Built with Next.js & Tailwind CSS
+          © 2025 Krishna Prasanth Sridhar. Built with Next.js & Tailwind CSS
         </p>
       </footer>
 
