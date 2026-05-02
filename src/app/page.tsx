@@ -2,6 +2,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 interface Message {
   id: string;
@@ -16,7 +17,7 @@ export default function Portfolio() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "Hi! I'm Krishna's AI assistant. Ask me anything about his AI engineering work, SaaS projects, or agent-powered tools!",
+      text: "Hi! I'm Krishna's AI assistant. Ask me about his LLM engineering, RAG systems, agent pipelines, or full-stack AI products!",
       sender: 'system',
       timestamp: new Date()
     }
@@ -38,22 +39,16 @@ export default function Portfolio() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Function to call your Python API
   const getBotResponseFromAPI = async (userMessage: string): Promise<string> => {
     try {
-      const response = await fetch('https://agentic-ai-ov9y.onrender.com/chat', {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // Add any additional headers like API keys if needed
-          // 'Authorization': 'Bearer YOUR_API_KEY',
         },
         body: JSON.stringify({
           message: userMessage,
-          history: messages.map(msg => ({ role: msg.sender, content: msg.text })),
-          // Add any other parameters your API needs
-          // context: 'portfolio',
-          // user_id: 'visitor',
+          history: messages.map(msg => ({ role: msg.sender === 'user' ? 'user' : 'assistant', content: msg.text })),
         })
       });
 
@@ -62,14 +57,11 @@ export default function Portfolio() {
       }
 
       const data = await response.json();
-      console.log('API response data:', data);
-      // Adjust this based on your API response structure
-      // Example: if your API returns { response: "text" }
-      return data.response || data.reply || data.text || "Sorry, I couldn't process that.";
+      return data.response || "Sorry, I couldn't process that.";
 
     } catch (error) {
       console.error('Error calling API:', error);
-      return "I'm having trouble connecting right now. Please try again later or reach out directly at krishkrishnan2001@gmail.com";
+      return "I'm having trouble connecting right now. Please reach out directly at krishnasridhar2807@gmail.com";
     }
   };
 
@@ -87,7 +79,6 @@ export default function Portfolio() {
     setInputValue('');
     setIsTyping(true);
 
-    // Call your Python API
     const botResponseText = await getBotResponseFromAPI(inputValue);
 
     const botMessage: Message = {
@@ -109,9 +100,9 @@ export default function Portfolio() {
   };
 
   const quickQuestions = [
-    "What AI tools have you built?",
-    "Tell me about your SaaS experience",
-    "What agent frameworks do you use?",
+    "What RAG systems have you built?",
+    "Tell me about your agent pipelines",
+    "What LLM frameworks do you use?",
     "How can I contact you?"
   ];
 
@@ -122,14 +113,13 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-lg shadow-lg py-3' : 'bg-white/95 backdrop-blur-lg py-4'
-        }`}>
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-lg shadow-lg py-3' : 'bg-white/95 backdrop-blur-lg py-4'}`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <div className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
             KP
           </div>
           <ul className="hidden md:flex gap-8 text-slate-800 font-medium">
-            {['Home', 'About', 'Skills', 'Experience', 'Education', 'Contact'].map((item) => (
+            {['Home', 'About', 'Skills', 'Projects', 'Experience', 'Education', 'Contact'].map((item) => (
               <li key={item}>
                 <a
                   href={`#${item.toLowerCase()}`}
@@ -145,24 +135,12 @@ export default function Portfolio() {
 
       {/* Hero Section */}
       <section id="home" className="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center relative overflow-hidden px-6">
-        {/* Animated Background Elements */}
         <div className="absolute w-[500px] h-[500px] bg-white/10 rounded-full top-[-250px] right-[-250px] animate-float" />
         <div className="absolute w-[400px] h-[400px] bg-white/10 rounded-full bottom-[-200px] left-[-200px] animate-float-delayed" />
 
         <div className="text-center text-white z-10 max-w-4xl">
-          {/* Profile Image */}
           <div className="mb-8 relative w-48 h-48 mx-auto">
             <div className="w-48 h-48 rounded-full bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-sm flex items-center justify-center border-4 border-white/30 shadow-2xl">
-              {/* Replace with your actual image */}
-              {/* <Image
-                src="/profile.jpg"
-                alt="Krishna Prasanth Sridhar"
-                width={192}
-                height={192}
-                className="rounded-full object-cover"
-                priority
-              /> */}
-              {/* Fallback - shows initials */}
               <span className="text-6xl font-bold">KP</span>
             </div>
           </div>
@@ -171,10 +149,10 @@ export default function Portfolio() {
             Krishna Prasanth Sridhar
           </h1>
           <p className="text-2xl md:text-3xl mb-4 opacity-90 animate-fade-in-up animation-delay-200">
-            AI Engineer
+            AI Product Engineer
           </p>
           <p className="text-lg md:text-xl mb-8 opacity-80 max-w-2xl mx-auto animate-fade-in-up animation-delay-400">
-            Building Agent-Powered SaaS Tools | Turning AI into Products
+            LLM Engineering &nbsp;·&nbsp; RAG Systems &nbsp;·&nbsp; AI Agents &nbsp;·&nbsp; Full Stack
           </p>
           <div className="flex gap-4 justify-center flex-wrap animate-fade-in-up animation-delay-600">
             <a
@@ -184,15 +162,26 @@ export default function Portfolio() {
               Get In Touch
             </a>
             <a
-              href="#experience"
+              href="#projects"
               className="px-8 py-3 bg-transparent border-2 border-white text-white rounded-full font-semibold hover:bg-white hover:text-indigo-600 hover:-translate-y-1 transition-all"
             >
-              View My Work
+              View My Projects
+            </a>
+            <a
+              href="/resume.pdf"
+              download="Krishna_Prasanth_Sridhar_Resume.pdf"
+              className="px-8 py-3 bg-white/20 backdrop-blur-sm border-2 border-white/60 text-white rounded-full font-semibold hover:bg-white hover:text-indigo-600 hover:-translate-y-1 transition-all flex items-center gap-2"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Download Resume
             </a>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
           <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
             <path d="M12 5v14M19 12l-7 7-7-7" />
@@ -211,45 +200,45 @@ export default function Portfolio() {
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div>
               <h3 className="text-2xl font-semibold text-indigo-600 mb-4">
-                AI Engineer Building Agent-Powered SaaS
+                Building Intelligent Systems with LLMs, RAG & Agents
               </h3>
               <p className="text-slate-600 mb-4 leading-relaxed">
-                I build production-grade AI agents and ship them as SaaS products that solve real business problems.
+                I&apos;m an AI Engineer specializing in building production-grade systems that leverage Large Language Models, Retrieval-Augmented Generation, and autonomous agent architectures.
               </p>
               <p className="text-slate-600 mb-4 leading-relaxed">
-                My focus is on designing multi-agent systems, integrating LLMs into full-stack applications, and delivering polished SaaS tools that users actually pay for.
+                From designing multi-step RAG pipelines with semantic search and re-ranking, to orchestrating multi-agent workflows with LangGraph and tool-calling APIs — I build AI systems that actually work in production.
               </p>
               <p className="text-slate-600 mb-4 leading-relaxed">
-                I combine deep expertise in AI frameworks (LangChain, OpenAI, Anthropic), modern web stacks (Next.js, Node.js), and automation orchestration (n8n, APIs) to go from idea to deployed product.
+                I pair deep AI expertise with full-stack engineering (Next.js, Node.js, Python) to ship complete, polished products — not just demos.
               </p>
 
               <div className="mt-6">
-                <h4 className="font-semibold text-lg mb-3 text-slate-800">Core Interests:</h4>
+                <h4 className="font-semibold text-lg mb-3 text-slate-800">Core Expertise:</h4>
                 <ul className="space-y-2 text-slate-600">
                   <li className="flex items-start gap-2">
                     <span className="text-indigo-600 mt-1">▹</span>
-                    <span>Designing multi-agent architectures for SaaS products</span>
+                    <span>LLM engineering with OpenAI, Anthropic Claude, and open-source models</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-indigo-600 mt-1">▹</span>
-                    <span>Shipping AI-powered tools with real monetization models</span>
+                    <span>RAG pipelines with vector databases, embeddings, and semantic retrieval</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-indigo-600 mt-1">▹</span>
-                    <span>Integrating LLMs into full-stack production applications</span>
+                    <span>Agentic systems: tool calling, multi-agent orchestration, memory layers</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-indigo-600 mt-1">▹</span>
-                    <span>Automating business workflows with intelligent agents</span>
+                    <span>Full-stack AI product development from API to deployed UI</span>
                   </li>
                 </ul>
               </div>
 
               <div className="grid grid-cols-2 gap-4 mt-8">
                 {[
-                  { value: '3+', label: 'Years Experience' },
-                  { value: '10+', label: 'AI & Dev Tools' },
-                  { value: '2', label: 'SaaS Products Shipped' },
+                  { value: '3+', label: 'Years Engineering' },
+                  { value: '15+', label: 'AI Tools & Frameworks' },
+                  { value: '5+', label: 'AI Systems Shipped' },
                   { value: '3.83', label: 'GPA' }
                 ].map((stat, idx) => (
                   <div key={idx} className="bg-white p-6 rounded-2xl text-center shadow-lg hover:-translate-y-2 transition-transform">
@@ -287,7 +276,7 @@ export default function Portfolio() {
                       <polyline points="22,6 12,13 2,6" />
                     </svg>
                   ),
-                  text: 'krishkrishnan2001@gmail.com'
+                  text: 'krishnasridhar2807@gmail.com'
                 }
               ].map((item, idx) => (
                 <div
@@ -313,12 +302,30 @@ export default function Portfolio() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { title: 'AI & Agents', skills: ['OpenAI', 'Anthropic', 'LangChain', 'LangGraph', 'RAG', 'Vector DBs', 'Prompt Engineering', 'AI Agents'] },
-              { title: 'SaaS & Full-Stack', skills: ['Next.js', 'React', 'Node.js', 'TypeScript', 'Python', 'REST APIs'] },
-              { title: 'Automation & Orchestration', skills: ['n8n', 'Workflow Orchestration', 'API Integrations', 'Webhooks', 'Agentic Pipelines'] },
-              { title: 'Databases & Backend', skills: ['MongoDB', 'PostgreSQL', 'MySQL', 'GraphQL', 'Supabase'] },
-              { title: 'DevOps & Deployment', skills: ['Vercel', 'Azure', 'Docker', 'GitHub Actions', 'Git'] },
-              { title: 'UI & Frontend', skills: ['Tailwind CSS', 'React', 'Angular', 'Vue JS', 'Playwright'] }
+              {
+                title: 'LLM Engineering',
+                skills: ['OpenAI GPT-4', 'Anthropic Claude', 'Gemini', 'LLaMA', 'Mistral', 'HuggingFace', 'Prompt Engineering', 'Fine-tuning']
+              },
+              {
+                title: 'RAG & Vector Search',
+                skills: ['LangChain', 'LlamaIndex', 'Pinecone', 'ChromaDB', 'FAISS', 'Weaviate', 'OpenAI Embeddings', 'Semantic Search']
+              },
+              {
+                title: 'AI Agents & Orchestration',
+                skills: ['LangGraph', 'AutoGen', 'CrewAI', 'Tool Calling', 'Function Calling', 'Multi-Agent Systems', 'n8n', 'Agentic Pipelines']
+              },
+              {
+                title: 'Full Stack Development',
+                skills: ['Next.js', 'React', 'Node.js', 'TypeScript', 'Python', 'FastAPI', 'REST APIs', 'GraphQL']
+              },
+              {
+                title: 'Databases & Backend',
+                skills: ['PostgreSQL', 'MongoDB', 'Supabase', 'MySQL', 'Redis', 'Vector Stores']
+              },
+              {
+                title: 'DevOps & Cloud',
+                skills: ['Vercel', 'Azure', 'Docker', 'GitHub Actions', 'Git', 'Playwright', 'Pytest']
+              }
             ].map((category, idx) => (
               <div
                 key={idx}
@@ -341,8 +348,77 @@ export default function Portfolio() {
         </div>
       </section>
 
+      {/* Projects Section */}
+      <section id="projects" className="py-20 px-6 bg-slate-50">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-12 relative">
+            AI Projects
+            <span className="absolute bottom-[-10px] left-1/2 -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full" />
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {[
+              {
+                title: 'Job Application Agent',
+                tag: 'Multi-Agent · LangGraph · Automation',
+                description: 'Architected a multi-agent pipeline using LangGraph to orchestrate job search, ATS scoring, resume tailoring, and automated job application submission end-to-end. Built an ATS scoring agent using the Claude API to evaluate resume-to-job-description alignment across four dimensions, filtering out roles below 60% match. Integrated dual LLM support (Claude Sonnet + GPT-4o) with automatic fallback, and automated LinkedIn Easy Apply workflows using Playwright.',
+                stack: ['LangGraph', 'Claude API', 'GPT-4o', 'Playwright', 'Next.js', 'PostgreSQL', 'Supabase', 'Google Cloud Run'],
+                highlights: ['Claude API · ATS Scoring', 'Dual LLM Fallback', 'LinkedIn Automation'],
+                link: 'https://job-automation-agent.vercel.app/'
+              },
+              {
+                title: 'FlowPilot',
+                tag: 'AI Project Management · Full Stack',
+                description: 'Engineered an AI-powered planning agent using GPT-4 to automatically break down project goals into actionable tasks and epics, reducing manual planning time by ~80%. Implemented three specialized AI agents (planning, summary, risk detection) for daily status reports. Built an interactive React Kanban board with drag-and-drop, GitHub webhook integration for auto-closing tasks on PR merge, and a multi-tenant auth system with role-based access control.',
+                stack: ['OpenAI GPT-4', 'Next.js', 'React', 'PostgreSQL', 'Prisma', 'NextAuth.js', 'GitHub OAuth', 'GitHub Webhooks'],
+                highlights: ['3 Specialized AI Agents', 'GitHub Webhook Sync', 'Role-Based Access'],
+                link: 'https://flowpilot-one-alpha.vercel.app/'
+              }
+            ].map((project, idx) => (
+              <div
+                key={idx}
+                className="bg-white p-8 rounded-2xl shadow-lg hover:-translate-y-3 hover:shadow-2xl transition-all flex flex-col"
+              >
+                <span className="text-xs font-semibold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full w-fit mb-3">
+                  {project.tag}
+                </span>
+                <h3 className="text-2xl font-bold text-slate-800 mb-3">{project.title}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed flex-1 mb-5">{project.description}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.highlights.map((h, hidx) => (
+                    <span key={hidx} className="px-3 py-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full text-xs font-semibold">
+                      {h}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {project.stack.map((tech, tidx) => (
+                    <span key={tidx} className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-auto flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full text-sm font-semibold w-fit hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                  View Project
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Experience Section */}
-      <section id="experience" className="py-20 px-6 bg-slate-50">
+      <section id="experience" className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-12 relative">
             Work Experience
@@ -350,39 +426,37 @@ export default function Portfolio() {
           </h2>
 
           <div className="relative">
-            {/* Timeline Line */}
             <div className="hidden md:block absolute left-1/2 -translate-x-1/2 w-1 h-full bg-gradient-to-b from-indigo-600 to-purple-600" />
 
             {[
               {
-                title: 'AI Engineer Intern',
+                title: 'AI Product Engineer Intern',
                 company: 'AIFS',
                 location: 'Naperville, Illinois',
                 date: 'June 2025 - August 2025',
                 points: [
-                  'Built AI agent pipelines using Python and TypeScript to automate complex workflows, reducing manual intervention and accelerating delivery cycles',
-                  'Developed LLM-integrated tooling that connected to internal APIs, enabling intelligent decision-making across backend services',
-                  'Shipped agent-powered features into production environments, leveraging Playwright and Pytest to ensure reliability of AI-driven application logic',
-                  'Collaborated cross-functionally to define agent behaviors, evaluate outputs, and iterate on prompt engineering for improved accuracy'
+                  'Led end-to-end product development, designing, building, and deploying AI-powered applications using machine learning and Generative AI — delivering production-ready solutions with a focus on scalability, usability, and performance.',
+                  'Built full-stack applications with strong expertise in backend development and intuitive UI/UX design, ensuring seamless integration of AI models into user-facing systems.',
+                  'Translated concepts from ML research papers into practical implementations, enabling innovation in model design and improving accuracy and efficiency of AI solutions in production.',
+                  'Independently shipped AI products across the full lifecycle, maintaining a portfolio of projects showcasing expertise in NLP, computer vision, and generative AI.',
+                  'Collaborated with stakeholders to understand workflows and business logic, applying strong problem-solving skills and an entrepreneurial mindset to drive innovation.'
                 ]
               },
               {
                 title: 'Software Engineer',
-                company: 'GoWebEz',
+                company: 'GOWEBEZ – Inflowcare & Language Dynamic Groups',
                 location: 'Chennai, India',
                 date: 'March 2021 - December 2023',
-                subtitle: 'Inflowcare & Language Dynamic Groups - SaaS Platforms',
                 points: [
-                  'Engineered core features for two B2B SaaS platforms — a healthcare scheduling tool and an academic assessment platform — serving hundreds of active users',
-                  'Integrated AI-powered agents to automate data processing, log analysis, and workflow routing, cutting manual overhead by over 40%',
-                  'Built and maintained full-stack features end-to-end using Next.js, Node.js, and MongoDB, with a focus on performance, security, and accessibility',
-                  'Led API design and third-party integrations that expanded product capabilities without increasing operational complexity',
-                  'Worked in agile sprints with U.S.-based stakeholders, consistently delivering production-ready code on time'
+                  'Built healthcare-focused machine learning models using Scikit-learn, XGBoost, and Random Forest — computing patient risk predictions and managing clinical datasets to improve diagnosis accuracy.',
+                  'Analyzed structured and unstructured healthcare data using SQL Server and MongoDB, applied unsupervised learning and clustering techniques to identify disease patterns and support population health management.',
+                  'Developed deep learning solutions using Keras and PyTorch for NLP and computer vision use cases, modifying neural network architectures to improve clinical text analysis and medical imaging interpretation.',
+                  'Implemented end-to-end pipelines on Azure Machine Learning and Databricks, applying MLOps, version control, and CI/CD to ensure scalable, compliant, production-ready healthcare AI systems.',
+                  'Collaborated with clinicians and analysts to design experiments, performed statistical analysis and A/B testing, and researched Generative AI and agentic applications to enhance patient engagement.'
                 ]
               }
             ].map((job, idx) => (
               <div key={idx} className="mb-12 relative">
-                {/* Timeline Dot */}
                 <div className="hidden md:block absolute left-1/2 -translate-x-1/2 w-5 h-5 bg-white border-4 border-indigo-600 rounded-full z-10" />
 
                 <div className={`md:w-[calc(50%-40px)] ${idx % 2 === 0 ? 'md:ml-auto md:pl-12' : 'md:pr-12'}`}>
@@ -390,10 +464,7 @@ export default function Portfolio() {
                     <h3 className="text-2xl font-semibold text-indigo-600 mb-2">{job.title}</h3>
                     <p className="text-purple-600 font-semibold mb-1">{job.company} | {job.location}</p>
                     <p className="text-slate-500 text-sm mb-4">{job.date}</p>
-                    {job.subtitle && (
-                      <p className="text-purple-600 font-semibold mb-3">{job.subtitle}</p>
-                    )}
-                    <ul className="space-y-2">
+                      <ul className="space-y-2">
                       {job.points.map((point, pidx) => (
                         <li key={pidx} className="flex items-start gap-2 text-slate-600">
                           <span className="text-indigo-600 mt-1 flex-shrink-0">▹</span>
@@ -410,7 +481,7 @@ export default function Portfolio() {
       </section>
 
       {/* Education Section */}
-      <section id="education" className="py-20 px-6">
+      <section id="education" className="py-20 px-6 bg-slate-50">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-12 relative">
             Education
@@ -457,9 +528,9 @@ export default function Portfolio() {
       {/* Contact Section */}
       <section id="contact" className="py-20 px-6 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-4">Let&apos;s Connect</h2>
+          <h2 className="text-4xl font-bold mb-4">Let&apos;s Build Something with AI</h2>
           <p className="text-xl mb-12 opacity-90">
-            Building something with AI? Let&apos;s connect — whether you&apos;re looking to integrate agents into your product, automate workflows, or just talk shop about the future of agent-powered SaaS.
+            Need an LLM integration, RAG system, or agent pipeline built? Open to full-time roles, freelance projects, and AI consulting. Let&apos;s connect.
           </p>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -472,8 +543,8 @@ export default function Portfolio() {
                   </svg>
                 ),
                 title: 'Email',
-                value: 'krishkrishnan2001@gmail.com',
-                link: 'https://mail.google.com/mail/?view=cm&to=krishkrishnan2001@gmail.com'
+                value: 'krishnasridhar2807@gmail.com',
+                link: 'https://mail.google.com/mail/?view=cm&to=krishnasridhar2807@gmail.com'
               },
               {
                 icon: (
@@ -517,7 +588,7 @@ export default function Portfolio() {
       {/* Footer */}
       <footer className="bg-slate-900 text-white text-center py-8">
         <p className="opacity-80">
-          © 2025 Krishna Prasanth Sridhar. Built with Next.js & Tailwind CSS
+          © 2025 Krishna Prasanth Sridhar · AI Engineer · Built with Next.js & Tailwind CSS
         </p>
       </footer>
 
@@ -541,7 +612,6 @@ export default function Portfolio() {
       {/* Chatbot Window */}
       {chatOpen && (
         <div className="fixed bottom-24 right-6 w-96 h-[600px] bg-white rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden">
-          {/* Chat Header */}
           <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-4 text-white">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center font-bold">
@@ -549,12 +619,11 @@ export default function Portfolio() {
               </div>
               <div>
                 <h3 className="font-semibold">Krishna&apos;s AI Assistant</h3>
-                <p className="text-xs opacity-90">Powered by AI</p>
+                <p className="text-xs opacity-90">Ask about LLM · RAG · Agents · Full Stack</p>
               </div>
             </div>
           </div>
 
-          {/* Chat Messages */}
           <div
             ref={chatContainerRef}
             className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50"
@@ -570,9 +639,14 @@ export default function Portfolio() {
                     : 'bg-white text-slate-800 shadow-md'
                     }`}
                 >
-                  <p className="text-sm leading-relaxed">{message.text}</p>
-                  <p className={`text-xs mt-1 ${message.sender === 'user' ? 'text-white/70' : 'text-slate-400'
-                    }`}>
+                  {message.sender === 'user' ? (
+                    <p className="text-sm leading-relaxed">{message.text}</p>
+                  ) : (
+                    <div className="text-sm leading-relaxed prose prose-sm max-w-none prose-p:my-1 prose-p:leading-relaxed prose-strong:text-indigo-700 prose-strong:font-semibold prose-ul:my-1 prose-ul:pl-4 prose-li:my-0.5 prose-ol:my-1 prose-ol:pl-4 prose-headings:text-slate-800 prose-headings:font-semibold prose-headings:mt-2 prose-headings:mb-1 prose-h3:text-sm prose-h4:text-sm prose-code:bg-slate-100 prose-code:px-1 prose-code:rounded prose-code:text-indigo-600 prose-code:text-xs">
+                      <ReactMarkdown>{message.text}</ReactMarkdown>
+                    </div>
+                  )}
+                  <p className={`text-xs mt-1 ${message.sender === 'user' ? 'text-white/70' : 'text-slate-400'}`}>
                     {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </p>
                 </div>
@@ -594,7 +668,6 @@ export default function Portfolio() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Quick Questions */}
           {messages.length === 1 && (
             <div className="px-4 py-3 bg-white border-t border-slate-200">
               <p className="text-xs text-slate-500 mb-2">Quick questions:</p>
@@ -612,7 +685,6 @@ export default function Portfolio() {
             </div>
           )}
 
-          {/* Chat Input */}
           <div className="p-4 bg-white border-t border-slate-200">
             <div className="flex gap-2">
               <input
