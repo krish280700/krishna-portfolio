@@ -707,7 +707,9 @@ export default function Portfolio() {
               </button>
             </div>
           </div>
+          <script src="http://localhost:5173/apps/smile-design/widget.js" data-practice="pavi-kp" async></script>
         </div>
+      
       )}
 
       <style jsx>{`
