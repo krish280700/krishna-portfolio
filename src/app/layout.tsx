@@ -28,6 +28,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <script src="http://localhost:5173/apps/smile-design/widget.js" data-practice="pavi-kp" async></script>
       </body>
     </html>
   );
